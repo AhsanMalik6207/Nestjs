@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-
+// Service is injectable to controller
 @Injectable()
 export class QuizService {
     getAllQuiz(){
