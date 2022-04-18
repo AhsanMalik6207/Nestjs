@@ -17,7 +17,7 @@ export class QuizController {
     @HttpCode(200)
     // for validation we use pipes (DTO through pipes)
     @UsePipes(ValidationPipe)
-    createQuiz(@Body() quizData:CreateQuizDto){
-        return {data:quizData};
+    async createQuiz(@Body() quizData:CreateQuizDto){
+        return await this.quizService.createNewQuiz(quizData);
     }
 }

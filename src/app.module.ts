@@ -7,6 +7,7 @@ import { QuizController } from './modules/quiz/quiz.controller';
 import { QuizModule } from './modules/quiz/quiz.module';
 
 //The root module of the application.
+// we use controller and providers
 @Module({
   imports:[QuizModule, TypeOrmModule.forRoot(typeOrmConfig)],
   controllers: [AppController],
