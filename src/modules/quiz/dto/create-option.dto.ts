@@ -1,11 +1,14 @@
 import { IsNotEmpty, Length } from "class-validator";
 // DTO(data transfer object) runs validation.
-export class CreateQuestionDto {
+export class CreateOptonDto {
     @IsNotEmpty()
     @Length(3,255)
-    question:string;
+    text:string;
     
     @IsNotEmpty()
-    quizId:number; 
+    questionId:number; 
+
+    @IsNotEmpty()
+    isCorrect: boolean;
 
 }
