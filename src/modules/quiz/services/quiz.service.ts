@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateQuizDto } from "../dto/CreateQuiz.dto";
+import { Question } from "../entities/question.entity";
 import { Quiz } from "../entities/quiz.entity";
 import { QuizRepository } from "../repositories/quiz.repository";
 
@@ -8,8 +9,12 @@ import { QuizRepository } from "../repositories/quiz.repository";
 @Injectable()
 export class QuizService {
     constructor(@InjectRepository(QuizRepository) private quizRepository:QuizRepository, ){}
-    getAllQuiz(){
-        return [1,2,3,4, 'From the service'];
+
+    // typeorm allow us to make custom query through query builder
+    async getAllQuiz(): Promise<Quiz[]>{
+        return await this.quizRepository.createQueryBuilder('q')
+        .leftJoinAndSelect('q.questions','qt')
+        .leftJoinAndSelect('qt.options','o').getMany();
     }
 
     async getQuizById(id:number): Promise<Quiz>{

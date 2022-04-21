@@ -10,6 +10,10 @@ export class QuestoinService{
       constructor(@InjectRepository(QuestionRepository) 
       private questionRepositoy:QuestionRepository){}
 
+      findQuestionById(id: number): Promise<Question>{
+            return this.questionRepositoy.findOne(id, {relations: ['quiz', 'options']})
+      }
+
       async createQuestion(question: CreateQuestionDto, quiz:Quiz): Promise<Question>{
           // save return the promises then entity
        const newQuestion = await this.questionRepositoy.save({

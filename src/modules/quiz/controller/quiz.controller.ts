@@ -10,7 +10,7 @@ export class QuizController {
     constructor(private quizService: QuizService) {}
 
     @Get("/")
-    getAllQuiz(){
+    getAllQuiz(): Promise<Quiz[]>{
         return this.quizService.getAllQuiz();
     }
 
