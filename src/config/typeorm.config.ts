@@ -6,11 +6,11 @@ export default class TypeOrmConfig{
     static getOrmConfig(configService:ConfigService):TypeOrmModuleOptions{
         return {
             type: 'postgres',
-            host: configService.get("DB_HOST"),
-            port: configService.get("DB_PORT"),
+            host: 'localhost',
+            port: 5432,
             username: 'postgres',
             password: 'root',
-            database: configService.get("DB_NAME"),
+            database: 'quiz',
             entities: [
                 __dirname + '/../**/*.entity{.ts,.js}',
             ],
