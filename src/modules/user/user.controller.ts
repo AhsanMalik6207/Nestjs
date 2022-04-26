@@ -22,4 +22,6 @@
     ): Promise<User> {
       return await this.userService.doUserRegistration(userRegister);
     }
+
+ 
   }
