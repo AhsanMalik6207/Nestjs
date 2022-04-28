@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { CacheModule, MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { QuestoinController } from './controller/question.controller';
 import { QuestionRepository } from './repositories/question.repository';
@@ -16,8 +16,14 @@ import { AuditMiddleware } from 'src/middlewares/audit.middleware';
 @Module({
     providers: [QuizService, QuestoinService, OptionService],
     controllers: [QuizController, QuestoinController, OptionController],
-    imports: [TypeOrmModule.forFeature([QuizRepository,QuestionRepository,OptionRepository])]
+    imports: [TypeOrmModule.forFeature([QuizRepository,QuestionRepository,OptionRepository]),
+     CacheModule.register({
+        ttl:5, // seconds
+        max:100 // maximum number of items in cache
+
+    })]
 })
+
 export class QuizModule implements NestModule{
     configure(consumer: MiddlewareConsumer) {
         consumer
