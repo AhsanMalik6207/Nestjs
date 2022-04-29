@@ -1,10 +1,10 @@
-import { Body, CacheInterceptor, CacheKey, CacheTTL, Controller, Get, HttpCode, Param, ParseIntPipe, Post, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, CacheInterceptor, CacheKey, CacheTTL, Controller, Get, HttpCode, Param, ParseIntPipe, Post, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CreateQuizDto } from '../dto/CreateQuiz.dto';
 import { Quiz } from '../entities/quiz.entity';
 import { QuizService } from '../services/quiz.service';
 import {BenchmarkInterceptor} from '../../../interceptors/benchmark.interceptor'
-
+// import {AuthGuard} from '../../../gaurds/auth.gaurd'
 @Controller("quiz")
 @UseInterceptors(CacheInterceptor,BenchmarkInterceptor)
 export class QuizController {
@@ -12,8 +12,11 @@ export class QuizController {
     constructor(private quizService: QuizService) {}
 
     @Get("/")
+    // @UseGuards(AuthGuard)
+// for interceptors
     @CacheKey('allQuizs')
     @CacheTTL(15)
+
     @ApiOperation({summary: " get all data from this api "})
     @ApiResponse({
         status:200,

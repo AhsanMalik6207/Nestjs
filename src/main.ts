@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+// import { AuthGuard } from './gaurds/auth.gaurd';
 //NestFactory exposes a few static methods that allow creating an application instance. 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,7 @@ async function bootstrap() {
   .build();
 const document = SwaggerModule.createDocument(app, config);
 SwaggerModule.setup('api', app, document);
+  // app.useGlobalGuards(new AuthGuard());
   await app.listen(3000);
 }
 bootstrap();
