@@ -13,7 +13,7 @@ export class QuizController {
 
     @Get("/")
     // @UseGuards(AuthGuard)
-// for interceptors
+    // for interceptors
     @CacheKey('allQuizs')
     @CacheTTL(15)
 
@@ -22,6 +22,7 @@ export class QuizController {
         status:200,
         description: ' All data list'
     })   
+
     @ApiResponse({
         status:403,
         description: 'forbidden'

@@ -2,7 +2,8 @@ import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nes
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
+// interceptor have a set of capabilities which are inspired by aspect oriented programing such as
+// bind extra logic before and after method execution
 @Injectable()
 export class BenchmarkInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
